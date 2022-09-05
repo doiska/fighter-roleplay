@@ -1,0 +1,5 @@
+{
+	"name": "@fighter/typings",
+	"version": "1.0.0",
+	"main": "global.d.ts"
+}
