@@ -1,6 +1,25 @@
 {
 	"compilerOptions": {
+		"baseUrl": ".",
 		"paths": {
+			"@app/*": [
+				"./app/*"
+			],
+			"@controllers/*": [
+				"./controllers/*"
+			],
+			"@infra/*": [
+				"./infra/*"
+			],
+			"@providers/*": [
+				"./providers/*"
+			],
+			"@useCases/*": [
+				"./useCases/*"
+			],
+			"@models/*": [
+				"./orm/models/*"
+			],
 			"@typings/*": [
 				"../typings/*"
 			]

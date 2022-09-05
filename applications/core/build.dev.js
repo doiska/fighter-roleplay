@@ -8,57 +8,46 @@ async function watch() {
 	const { esbuildDecorators } = require('@anatine/esbuild-decorators');
 
 	const onRebuild = (target, err, res) => {
-		if(err) {
+		if (err) {
 			console.error(chalk.red('Rebuild failed :('), err);
 			return;
 		}
 
-		console.log(chalk.green('Rebuild succeeded :), warnings:'), res.warnings);
+		console.log(chalk.green('Rebuild succeeded!'), res.warnings);
 		console.log(chalk.yellow('Checking types...'));
 
 		const p = exec('tsc -p ' + target);
 
-		p.on('error', (err) => console.error(chalk.red('Typechecking failed :('), err))
+		p.on('error', (_err) => console.error(chalk.red('Typechecking failed.'), _err))
 		p.on('data', (d) => console.log(chalk.yellow(`${d.toString()}`)))
 	}
 
-	require('esbuild')
-		.build({
-			entryPoints: ['./resources/client/client.ts'],
-			bundle: true,
-			outfile: buildPath + '/client/client.js',
-			target: ['chrome58'],
-			format: 'iife',
-			watch: {
-				onRebuild: (err, res) => onRebuild('resources/client', err, res)
-			}
-		})
-		.then((r) => console.log(chalk.green('[client]: Watching...')))
-		.catch((err) => {
-			console.log(err);
-			process.exit(1);
-		});
+	const prepare = (env) => {
+		const folder = path.resolve(`./resources/${env}`);
+		const target = path.resolve(`${folder}/${env}.ts`);
+		const isServer = env === 'server';
 
-	require('esbuild')
-		.build({
-			entryPoints: ['./resources/server/server.ts'],
+		return {
+			entryPoints: [target],
+			outfile: path.resolve(buildPath, `${env}/${env}.js`),
 			bundle: true,
-			outfile: buildPath + '/server/server.js',
-			format: 'cjs',
 			platform: 'node',
 			external: ['typeorm'],
-			plugins: [
-				esbuildDecorators({ tsconfig: './resources/server/tsconfig.json' }),
-			],
+			target: isServer ? ['es2016'] : ['chrome58'],
+			format: isServer ? 'cjs' : 'iife',
+			plugins: [esbuildDecorators({ tsconfig: `${folder}/tsconfig.paths.json` })],
 			watch: {
-				onRebuild: (err, res) => onRebuild('resources/server', err, res)
-			},
-		})
-		.then(() => console.log(chalk.green('[server]: Watching...')))
-		.catch((err) => {
-			console.log(err);
-			process.exit(1);
-		});
+				onRebuild: (err, res) => onRebuild(folder, err, res),
+			}
+		}
+	}
+
+	const build = (env) => require('esbuild').build(prepare(env));
+
+	await build('server');
+	await build('client')
+
+	console.log(chalk.green('Watching for changes...'));
 }
 
 watch();
