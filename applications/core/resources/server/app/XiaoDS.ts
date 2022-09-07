@@ -1,4 +1,6 @@
-import { DataSource } from 'typeorm';
+import { AccountModel } from "@models/account.model";
+import { CharacterModel } from "@models/character.model";
+import { DataSource } from "typeorm";
 
 export const XiaoDS = new DataSource({
 	type: "postgres",
@@ -10,6 +12,7 @@ export const XiaoDS = new DataSource({
 	synchronize: true,
 	logging: true,
 	entities: [
-		'../orm/models/**/*.model.ts'
+		AccountModel,
+		CharacterModel,
 	]
-})
+});

@@ -1,9 +1,11 @@
 
 import { Xiao } from "@fighter/framework/decorators";
-import { SpawnController } from "@controllers/spawn.controller";
 
+import { AccountController } from "@controllers/account/account.controller";
+import { PlayerController } from "@controllers/player/player.controller";
+ 
 @Xiao({
-	controllers: [SpawnController],
+	controllers: [AccountController, PlayerController],
 	providers: []
 })
 export class XiaoApp {}
