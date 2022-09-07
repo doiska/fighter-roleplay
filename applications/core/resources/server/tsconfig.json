@@ -19,12 +19,5 @@
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "noEmit": true
-    },
-    "include": [
-        "./**/*",
-        "./common/**/*"
-    ],
-    "exclude": [
-        "**/node_modules"
-    ]
+    }
 }

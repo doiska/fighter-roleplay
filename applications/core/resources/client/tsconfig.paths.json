@@ -1,8 +1,15 @@
 {
 	"compilerOptions": {
+		"baseUrl": ".",
 		"paths": {
+			"@app/*": [
+				"./app/*"
+			],
+			"@controllers/*": [
+				"./controllers/*"
+			],
 			"@typings/*": [
-				"../typings/*"
+				"../../../typings/*"
 			]
 		}
 	}
