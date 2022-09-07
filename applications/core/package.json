@@ -4,7 +4,10 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "node build.prod.js",
-		"watch": "node build.dev.mjs"
+		"watch": "node build.dev.mjs",
+		"test-server": "vitest --verbose --ui --config ./resources/server/vitest.config.ts",
+		"test-client": "vitest --verbose --ui --config ./resources/client/vitest.config.ts",
+		"lint": "eslint --ext .ts ."
 	},
 	"devDependencies": {
 		"@anatine/esbuild-decorators": "^0.2.19",
@@ -17,7 +20,9 @@
 		"typescript": "^4.7.4"
 	},
 	"dependencies": {
+		"@discordjs/collection": "^1.1.0",
 		"@fighter/framework": "0.0.11",
+		"reflect-metadata": "^0.1.13",
 		"typeorm": "^0.3.9"
 	}
 }

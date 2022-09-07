@@ -5,8 +5,14 @@
 			"@app/*": [
 				"./app/*"
 			],
+			"@helpers/*": [
+				"./helpers/*"
+			],
 			"@controllers/*": [
 				"./controllers/*"
+			],
+			"@entities/*": [
+				"./entities/*"
 			],
 			"@infra/*": [
 				"./infra/*"
