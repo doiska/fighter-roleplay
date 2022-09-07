@@ -1,39 +1,42 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 import { ICharacter } from "@typings/authentication/character";
+import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-@Entity({ name: 'character' })
+@Entity({ name: "character" })
 export class CharacterModel implements ICharacter {
 
 	@PrimaryGeneratedColumn()
-	characterId: number;
+		characterId: number;
 
 	@Column()
-	accountId: number;
+		accountId: number;
 
 	@Column()
-	name: string;
+		name: string;
 
 	@Column()
-	bank: number;
+		identifier: string;
 
-	@Column()
-	cash: number;
+	@Column({ default: 0 })
+		bank: number;
 
-	@Column()
-	cloth_preset: number;
+	@Column({ default: 500 })
+		cash: number;
 
-	@Column()
-	faction: number;
+	@Column({ default: 0 })
+		cloth_preset: number;
 
-	@Column()
-	gender: number;
+	@Column({ default: -1 })
+		faction: number;
 
-	@Column()
-	job: number;
+	@Column({ default: 0 })
+		gender: number;
 
-	@Column()
-	payCheck: number;
+	@Column({ default: -1 })
+		job: number;
 
-	@Column()
-	playing_time: number;
+	@Column({ default: 0 })
+		payCheck: number;
+
+	@Column({ default: 0 })
+		playing_time: number;
 }
