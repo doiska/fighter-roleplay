@@ -1,5 +1,4 @@
-export interface ICharacter extends BaseInfo, GameInfo, CustomizationInfo, BankInfo, DetailsInfo {
-}
+export interface ICharacter extends BaseInfo, GameInfo, CustomizationInfo, BankInfo, DetailsInfo {}
 
 interface BaseInfo {
 	characterId: number;
