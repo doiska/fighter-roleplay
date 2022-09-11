@@ -44,7 +44,7 @@ module.exports = {
 					],
 					[
 						"/^@app/",
-						"/^@controllers/",
+						"/^@components/",
 						"/^@infra/",
 						"/^@orm/",
 						"/^@entities/",

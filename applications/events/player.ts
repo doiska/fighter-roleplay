@@ -1,3 +1,5 @@
 export enum PlayerEvents {
-	SPAWN_PLAYER = 'server:player:spawn',
+	PLAYER_LOADED = "server:player:loaded",
+	PLAYER_UNLOADED = "server:player:unloaded",
+	PLAYER_SPAWNED = "server:player:spawn",
 }

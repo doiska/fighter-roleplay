@@ -20,9 +20,17 @@ interface CustomizationInfo {
 interface BankInfo {
 	cash?: number;
 	bank?: number;
-	payCheck?: number;
+	pay_check?: number;
 }
 
 interface DetailsInfo {
 	playing_time?: number;
+}
+
+export interface ICharacterCreate {
+	source: number;
+	characterId: number;
+	accountId: number;
+	identifier: string;
+	name: string;
 }

@@ -1,0 +1,22 @@
+{
+    "extends": "./tsconfig.paths.json",
+    "compilerOptions": {
+		"emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "target": "es2016",
+        "lib": [
+            "es2017"
+        ],
+        "types": [
+            "@citizenfx/client",
+            "@types/node"
+        ],
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "noEmit": false
+    }
+}

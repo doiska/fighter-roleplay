@@ -10,21 +10,24 @@ export class AccountModel implements IAccount {
 	@PrimaryGeneratedColumn()
 		id: number;
 
-	@Column()
-		businessSlots: number;
-
-	@Column()
-		charSlots: number;
-
-	@Column()
-		houseSlots: number;
-
 	@Column({ type: "varchar" })
 		identifier: Identifier;
 
 	@Column({ type: "varchar", transformer: { from: parseStringToArray, to: parseArrayToString } })
 		identifiers: Identifier[];
 
-	@Column()
+	@Column({ type: "boolean", default: false })
+		whitelisted: boolean;
+	
+	@Column({ type: "smallint", default: 0 })
+		businessSlots: number;
+
+	@Column({ type: "smallint", default: 0 })
+		charSlots: number;
+
+	@Column({ type: "smallint", default: 0 })
+		houseSlots: number;
+
+	@Column({ type: "smallint", default: -1 })
 		premium: number;
 }

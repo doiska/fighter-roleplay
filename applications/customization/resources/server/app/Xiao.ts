@@ -7,7 +7,7 @@ import { PlayerController } from "@components/player/player.controller";
 import { PlayerService } from "@components/player/player.service";
  
 @Xiao({
-	controllers: [AccountController, PlayerController],
-	providers: [AccountService, PlayerService]
+	controllers: [],
+	providers: []
 })
 export class XiaoApp {}

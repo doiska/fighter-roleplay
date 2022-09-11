@@ -23,7 +23,7 @@ export class PlayerDB {
 		return this.repository.findOne({ where: { accountId: id } });
 	}
 
-	public getCharacterByIdentifier(identifier: string): Promise<CharacterModel> {
+	public async getCharacterByIdentifier(identifier: string): Promise<CharacterModel> {
 		return this.repository.findOne({ where: { identifier } });
 	}
 

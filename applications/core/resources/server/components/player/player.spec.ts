@@ -1,6 +1,5 @@
-import { PlayerService } from "@controllers/player/player.service";
+import { PlayerService } from "@components/player/player.service";
 
-import exp from "constants";
 import { describe, it, beforeAll, expect } from "vitest";
 
 describe("playerService", () => {
@@ -13,21 +12,7 @@ describe("playerService", () => {
 
 	it("should be able to add player", () => {
 
-		playerService.addPlayer({
-			characterId: 1,
-			accountId: 1,
-			name: "doiská",
-			source: "1",
-			identifier: "steam:123456789",
-		});
 
-		playerService.addPlayer({
-			characterId: 2,
-			accountId: 2,
-			name: "doiská2",
-			source: "2",
-			identifier: "steam:1234567892"
-		});
 
 		expect(playerService.getPlayer(1)).toBeDefined();
 	});

@@ -8,11 +8,13 @@ export const XiaoDS = new DataSource({
 	port: 5432,
 	username: "postgres",
 	password: "postgres",
-	database: "xiao",
+	database: "fighter",
+	schema: "core",
 	synchronize: true,
 	logging: true,
+	useUTC: true,
 	entities: [
 		AccountModel,
-		CharacterModel,
+		CharacterModel
 	]
 });
