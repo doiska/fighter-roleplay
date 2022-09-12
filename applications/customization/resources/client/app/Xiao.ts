@@ -1,5 +1,7 @@
 import { XiaoApplication } from "@fighter/framework";
 import { Xiao } from "@fighter/framework/decorators";
 
-@Xiao({ controllers: [], providers: [] })
+import { CustomizationController } from "../controllers/customization.controller";
+
+@Xiao({ controllers: [CustomizationController], providers: [] })
 export class Client {}

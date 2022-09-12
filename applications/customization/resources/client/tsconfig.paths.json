@@ -5,14 +5,20 @@
 			"@app/*": [
 				"./app/*"
 			],
-			"@components/*": [
-				"./controllers/*"
+			"@modules/*": [
+				"./modules/*"
 			],
 			"@typings/*": [
 				"../../../typings/*"
 			],
 			"@events/*": [
 				"../../../events/*"
+			],
+			"@shared/*": [
+				"../../../shared/*"
+			],
+			"~/*": [
+				"./*"
 			]
 		}
 	}

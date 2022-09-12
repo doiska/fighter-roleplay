@@ -1,10 +1,15 @@
 fx_version 'cerulean'
 game 'gta5'
-name 'core'
+name 'customization'
 
-client_scripts {
-    'dist/client/*.js'
+client_script './dist/client/client.js'
+
+files {
+  'dist/web/index.html',
+  'dist/web/assets/*.js',
+  'locales/*.json',
+  'peds.json',
+  'tattoos.json'
 }
-server_script {
-    'dist/server/*.js'
-}
+
+ui_page 'dist/web/index.html'

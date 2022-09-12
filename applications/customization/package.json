@@ -3,7 +3,6 @@
 	"version": "1.0.0",
 	"license": "MIT",
 	"scripts": {
-		"build": "node build.prod.js",
 		"watch": "node build.dev.mjs",
 		"test-server": "vitest --verbose --ui --config ./resources/server/vitest.config.ts",
 		"test-client": "vitest --verbose --ui --config ./resources/client/vitest.config.ts",
