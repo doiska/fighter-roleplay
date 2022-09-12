@@ -1,16 +1,14 @@
-import { Controller, LocalEvent } from "@fighter/framework/decorators";
+import { Controller, ServerEvent } from "@fighter/framework/decorators";
 import { EventEmitter } from "@fighter/framework/services";
 
 import { AccountService } from "@components/account/account.service";
 import { PlayerService } from "@components/player/player.service";
-import { CharacterEntity } from "@entities/character.entity";
 
 import { AccountEvents } from "@events/account";
-import { PlayerEvents } from "@events/player";
 import { getUserIdentifier } from "@helpers/account.helper";
 import { Wait } from "@helpers/task.helper";
 import { Deferral } from "@typings/utils/deferral";
- 
+
 @Controller()
 export class AccountController {
 
@@ -18,8 +16,8 @@ export class AccountController {
 		console.log("->> AccountController initialized");
 	}
 
-	@LocalEvent("playerConnecting")
-	public async onPlayerConnecting(_eventName: string, source: number, name: string, _setKickReason: (reason?: string) => void, deferrals: Deferral) {
+	@ServerEvent("playerConnecting")
+	public async onPlayerConnecting(source: number, name: string, _setKickReason: (reason?: string) => void, deferrals: Deferral) {
 		deferrals.defer();
 
 		await Wait(300);
@@ -40,28 +38,17 @@ export class AccountController {
 		}
 
 		if(accountStatus === "SUCCESS") {
-
 			await Wait(100);
-
 			deferrals.update("Success! Loading your account...");
-
-			const { id } = await this.accountService.getAccount(identifier);
-
-			const entity = this.playerService.addPlayer(source, {
-				accountId: id,
-				identifier: identifier,
-			});
-
-			await Wait(500);
-
-			await this.emitter.emit(PlayerEvents.PLAYER_LOADED, source, entity);
-
 			deferrals.done();
 		}
 	}
 
-	@LocalEvent("playerJoining")
-	public async onPlayerJoining(_eventName: string, source: string) {
+	@ServerEvent("playerJoining")
+	public async onPlayerJoining(source1: number, source: number) {
+
+		console.log(`[playerJoining] Player ${source1} || ${source} has been loaded.`);
+
 		const identifier = getUserIdentifier(source);
 
 		console.log(`[onPlayerJoining] Player ${source} (${identifier}) is joining the server.`);
@@ -78,18 +65,13 @@ export class AccountController {
 			return;
 		}
 
-		return this.emitter.emitNet(AccountEvents.ACCOUNT_LOADED, source, account);
+		return this.emitter.emit(AccountEvents.ACCOUNT_LOADED, source, account);
 	}
 
-	@LocalEvent("playerDropped")
-	public async onPlayerDropped(_eventName: string, source: string) {
-		await this.emitter.emit(PlayerEvents.PLAYER_UNLOADED, source);
+	@ServerEvent("playerDropped")
+	public async onPlayerDropped(source: number) {
+		await this.emitter.emit(AccountEvents.ACCOUNT_UNLOADED, source);
 		this.playerService.removePlayer(source);
 		console.log(`[playerDropped] Removed player ${source} from the server.`);
-	}
-
-	@LocalEvent(PlayerEvents.PLAYER_LOADED)
-	public async onPlayerLoaded(_eventName: string, source: string, entity: CharacterEntity) {
-		console.log(`[onPlayerLoaded] Player ${source} has been loaded.`, entity);
 	}
 }

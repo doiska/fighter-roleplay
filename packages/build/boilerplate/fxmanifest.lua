@@ -8,3 +8,7 @@ client_scripts {
 server_script {
     'dist/server/*.js'
 }
+
+files {
+    'assets/**/*',
+}

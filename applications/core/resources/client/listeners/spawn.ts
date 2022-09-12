@@ -1,5 +1,8 @@
-import { Controller, NetEvent } from "@fighter/framework/decorators";
+import { RegisterCommand, Controller, ClientEvent, ServerEvent } from "@fighter/framework/decorators";
 import { EventEmitter } from "@fighter/framework/services";
+
+import { PlayerEvents } from "@events/player";
+import { TestEvents } from "@events/test";
 
 @Controller()
 export class SpawnListener {
@@ -8,8 +11,25 @@ export class SpawnListener {
 		console.log("SpawnListener");
 	}
 
-	@NetEvent("spawnPlayer")
-	public onSpawnPlayer(_eventName: string, ...params: any[]) {
-		console.log(_eventName, "onSpawnPlayer", params);
+	@ServerEvent(TestEvents.TEST)
+	public onSpawnPlayer(...params: any[]) {
+		console.log("Test event", params, global.source);
+	}
+
+	@ClientEvent("onClientResourceStart")
+	public onResourceStart(resource: string) {
+
+		if (resource === GetCurrentResourceName()) {
+			console.log(`Resource ${resource} started with ${global.source}`);
+			emitNet(`fighter:${PlayerEvents.PLAYER_LOADED}`);
+		}
+	}
+
+	@RegisterCommand("test2")
+	public async onTestCommand(source: number, args: string[]) {
+
+		console.log(`->> [onTestCommand] Player ${source} executed test2 command with args: ${args}`);
+
+		this.emitter.emitNet(TestEvents.TEST2);
 	}
 }

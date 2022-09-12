@@ -1,4 +1,4 @@
-import { prepareBuild } from '../build/build.mjs';
+import { prepareBuild } from '../../packages/build/build.mjs';
 import { build } from "esbuild";
 
 const prepare = prepareBuild('./resources', 'core/dist');

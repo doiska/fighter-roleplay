@@ -5,7 +5,22 @@ import { esbuildDecorators } from "@anatine/esbuild-decorators";
 
 const BUILD_PATH = resolve('D:\\FiveM Server\\server\\resources\\[fighter_dist]');
 
-export function prepareBuild (sourcePath, buildFolder) {
+export function copy(src, dest) {
+	return new Promise((res, reject) => {
+
+		const path = resolve(BUILD_PATH, dest);
+
+		exec(`xcopy "${src}" "${path}" /E /Y /I`, (err, stdout, stderr) => {
+			if (err) {
+				reject(err);
+			} else {
+				res(stdout);
+			}
+		});
+	});
+}
+
+export function prepareBuild(sourcePath, buildFolder) {
 
 	const log_success = (service, ...args) => console.log(chalk.greenBright(`[${service}]`), ...args);
 	const log_info = (service, ...args) => console.log(chalk.blue(`[${service}]`), ...args);

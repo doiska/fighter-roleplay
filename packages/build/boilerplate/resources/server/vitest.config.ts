@@ -1,8 +1,8 @@
 import { resolve } from "path";
+import tsPaths from "tsconfig.paths.json";
 import swc from "unplugin-swc";
 import { defineConfig } from "vitest/config";
 
-import tsPaths from "./tsconfig.paths.json";
 
 const toSrcPath = (p: string) => resolve(__dirname, p);
 

@@ -1,6 +1,7 @@
 import { StatefulEntity } from "@entities/stateful.entity";
 
 import { ICharacter } from "@typings/authentication/character";
+import { Identifier } from "@typings/five/constants";
 import { AtLeast } from "@typings/utils/type.utils";
 
 export class CharacterEntity extends StatefulEntity	implements ICharacter {
@@ -8,7 +9,7 @@ export class CharacterEntity extends StatefulEntity	implements ICharacter {
 	public readonly accountId: number;
 	public readonly characterId: number;
 	public readonly source: string | number;
-	public readonly identifier: string;
+	public readonly identifier: Identifier;
 	public name: string;
 
 	public gender?: number;
