@@ -385,7 +385,7 @@ function setPedAppearance(ped: number, appearance: Omit<PedAppearance, "model">)
 	}
 }
 
-(() => {
+export const startCustomizationModule = () => {
 	Customization.loadModule();
 
 	exp("getPedModel", getPedModel);
@@ -411,4 +411,4 @@ function setPedAppearance(ped: number, appearance: Omit<PedAppearance, "model">)
 	exp("setPedTattoos", setPedTattoos);
 	exp("setPlayerAppearance", setPlayerAppearance);
 	exp("setPedAppearance", setPedAppearance);
-})();
+};

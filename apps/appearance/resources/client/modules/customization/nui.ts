@@ -52,12 +52,8 @@ export function registerNuiCallbacks(): void {
 	RegisterNuiCallbackType("appearance_exit");
 
 	on("__cfx_nui:appearance_get_locales", (_: any, cb: (arg: any) => void): void => {
-
-		console.log("appearance_get_locales");
-
 		const resourceName = GetCurrentResourceName();
 		const locales = LoadResourceFile(resourceName, "locales/en.json");
-
 		cb(locales);
 	});
 

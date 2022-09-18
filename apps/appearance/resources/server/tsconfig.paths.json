@@ -1,5 +1,4 @@
 {
-	"extends": "packages/tsconfig/tsconfig.base.paths.json",
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
@@ -26,6 +25,9 @@
 			],
 			"@models/*": [
 				"./orm/models/*"
+			],
+			"@events/*": [
+				"../../../events/*"
 			],
 			"@shared/*": [
 				"../../../shared/*"

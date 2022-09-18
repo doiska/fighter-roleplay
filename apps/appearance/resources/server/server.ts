@@ -5,5 +5,4 @@ import { XiaoApp } from "@app/Xiao";
 
 (async () => {
 	await XiaoApplication.create(XiaoApp).then(app => app.start());
-	console.log("Client started");
 })();

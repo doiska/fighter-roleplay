@@ -1,0 +1,32 @@
+{
+    "extends": "./tsconfig.paths.json",
+    "compilerOptions": {
+		"emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "target": "es2016",
+        "lib": [
+            "es2017"
+        ],
+        "types": [
+            "@citizenfx/client",
+            "@types/node",
+		],
+		"typeRoots": [
+			"../../../typings"
+		],
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "noEmit": false
+    },
+	"include": [
+		"./**/*.ts",
+		"../../../typings/**/*.d.ts"
+	],
+	"files": [
+		"../../../typings/global.d.ts"
+	]
+}

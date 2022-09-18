@@ -1,6 +1,6 @@
 fx_version 'cerulean'
 game 'gta5'
-name 'customization'
+name 'appearance'
 
 client_script './dist/client/client.js'
 

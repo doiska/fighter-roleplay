@@ -1,6 +1,6 @@
+import { registerNuiCallbacks } from "@modules/customization/nui";
 import { PED_COMPONENTS_IDS, PED_PROPS_IDS, FACE_FEATURES, HEAD_OVERLAYS, DEFAULT_CUSTOMIZATION_CONFIG, DATA_CLOTHES, } from "~/constants";
 import { pedModels, getPedAppearance, setPlayerAppearance, totalTattoos } from "~/customization";
-import { registerNuiCallbacks } from "modules/customization/nui";
 import { arrayToVector3, isPedMale, Delay } from "utils";
 
 // Override native typing
@@ -468,9 +468,10 @@ export const addPedTattoo = (ped: number, tattoos: TattooList): void => {
 	}
 };
 
-export const removePedTattoo = (ped: number, tattoos: TattooList): void => {
+export const removePedTattoo = (ped: number, tattoos: TattooList) => {
 	const isMale = isPedMale(ped);
 	ClearPedDecorations(ped);
+
 	for (const zone in tattoos) {
 		for (const element of tattoos[zone]) {
 			const { collection, hashFemale, hashMale } = element;
@@ -482,23 +483,23 @@ export const removePedTattoo = (ped: number, tattoos: TattooList): void => {
 
 export const setPreviewTattoo = (ped: number, data: TattooList, tattoo: Tattoo): void => {
 	const isMale = isPedMale(ped);
-	const { collection, hashFemale, hashMale } = tattoo;
-	const tattooGender = isMale ? hashMale : hashFemale;
+	const { collection: tattooColection, hashFemale: tattooHashFemale, hashMale: tattooHashMale } = tattoo;
+	const tattooGender = isMale ? tattooHashMale : tattooHashFemale;
 	ClearPedDecorations(ped);
-	AddPedDecorationFromHashes(ped, GetHashKey(collection), GetHashKey(tattooGender));
+	AddPedDecorationFromHashes(ped, GetHashKey(tattooColection), GetHashKey(tattooGender));
 
 	for (const zone in data) {
 		for (const element of data[zone]) {
 			const { name, collection, hashFemale, hashMale } = element;
 			if (tattoo.name !== name) {
-				const tattooGender = isMale ? hashMale : hashFemale;
-				AddPedDecorationFromHashes(ped, GetHashKey(collection), GetHashKey(tattooGender));
+				const decorationGender = isMale ? hashMale : hashFemale;
+				AddPedDecorationFromHashes(ped, GetHashKey(collection), GetHashKey(decorationGender));
 			}
 		}
 	}
 };
 
-function startPlayerCustomization(
+export function startPlayerCustomization(
 	cb: (appearance?: PedAppearance) => void,
 	_config = DEFAULT_CUSTOMIZATION_CONFIG,
 ): void {
@@ -588,33 +589,9 @@ function onResourceStop(resource: string) {
 
 export function loadModule(): void {
 	registerNuiCallbacks();
-	console.log("Loaded module");
 
 	on("onResourceStop", onResourceStop);
-
 	exp("startPlayerCustomization", startPlayerCustomization);
 }
-
-RegisterCommand(
-	"customization",
-	() => {
-		const _config = {
-			ped: true,
-			headBlend: true,
-			faceFeatures: true,
-			headOverlays: true,
-			components: true,
-			props: true,
-			allowExit: true,
-			tattoos: true,
-			automaticFade: true,
-		};
-
-		startPlayerCustomization(appearance => {
-			console.log(appearance);
-		}, _config);
-	},
-	false,
-);
 
 export default { loadModule };
