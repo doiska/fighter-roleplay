@@ -12,7 +12,6 @@ export class PlayerService {
 	private readonly _players: Collection<number, CharacterEntity>;
 
 	constructor() {
-		console.log("->> PlayerService constructor");
 		this._players = new Collection<number, CharacterEntity>();
 	}
 
@@ -28,6 +27,10 @@ export class PlayerService {
 
 	public getPlayer(source: number | string): CharacterEntity {
 		return this._players.get(this.ensureSourceIsNumber(source));
+	}
+
+	public getPlayers(): Collection<number, CharacterEntity> {
+		return this._players;
 	}
 
 	public getPlayerByCharacterId(characterId: number): CharacterEntity {

@@ -20,8 +20,8 @@ export class SpawnListener {
 	public onResourceStart(resource: string) {
 
 		if (resource === GetCurrentResourceName()) {
-			console.log(`Resource ${resource} started with ${global.source}`);
-			emitNet(`fighter:${PlayerEvents.PLAYER_LOADED}`);
+			console.log(`Resource ${resource} started with`);
+			this.emitter.emitNet(PlayerEvents.PLAYER_LOADED);
 		}
 	}
 
@@ -30,6 +30,6 @@ export class SpawnListener {
 
 		console.log(`->> [onTestCommand] Player ${source} executed test2 command with args: ${args}`);
 
-		this.emitter.emitNet(TestEvents.TEST2);
+		this.emitter.emitNet(PlayerEvents.PLAYER_LOADED);
 	}
 }

@@ -1,3 +1,5 @@
+import { EventEmitter } from "@fighter/framework/services";
+
 import { StatefulEntity } from "@entities/stateful.entity";
 
 import { ICharacter } from "@typings/authentication/character";
@@ -32,6 +34,14 @@ export class CharacterEntity extends StatefulEntity	implements ICharacter {
 
 		Object.assign(this, player);
 		this.source = source;
+	}
+
+	public showCustomization(): void {
+		if (!this.isConnected || !this.isLoggedIn) {
+			return;
+		}
+
+		emitNet("fighter:showCustomization", this.source);
 	}
 
 	public kick(reason?: string): void {

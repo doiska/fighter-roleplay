@@ -45,9 +45,9 @@ export class AccountController {
 	}
 
 	@ServerEvent("playerJoining")
-	public async onPlayerJoining(source1: number, source: number) {
+	public async onPlayerJoining(source: number) {
 
-		console.log(`[playerJoining] Player ${source1} || ${source} has been loaded.`);
+		console.log(`[playerJoining] Player ${source} has been loaded.`);
 
 		const identifier = getUserIdentifier(source);
 
@@ -70,8 +70,11 @@ export class AccountController {
 
 	@ServerEvent("playerDropped")
 	public async onPlayerDropped(source: number) {
+		const _source = global.source;
+
+		console.log(`[onPlayerDropped] Player ${source} ${_source} has been dropped.`);
+
 		await this.emitter.emit(AccountEvents.ACCOUNT_UNLOADED, source);
 		this.playerService.removePlayer(source);
-		console.log(`[playerDropped] Removed player ${source} from the server.`);
 	}
 }

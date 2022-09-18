@@ -19,6 +19,10 @@ export class PlayerDB {
 		return this.repository.save(character);
 	}
 
+	public async getCharacters(identifier: string): Promise<CharacterModel[]> {
+		return this.repository.find({ where: { identifier } });
+	}
+
 	public async getCharacterByAccountId(id: number): Promise<CharacterModel> {
 		return this.repository.findOne({ where: { accountId: id } });
 	}

@@ -1,0 +1,40 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@app/*": [
+				"./app/*"
+			],
+			"@helpers/*": [
+				"./helpers/*"
+			],
+			"@components/*": [
+				"./components/*"
+			],
+			"@entities/*": [
+				"./entities/*"
+			],
+			"@infra/*": [
+				"./infra/*"
+			],
+			"@providers/*": [
+				"./providers/*"
+			],
+			"@useCases/*": [
+				"./useCases/*"
+			],
+			"@models/*": [
+				"./orm/models/*"
+			],
+			"@typings/*": [
+				"../../../typings/*"
+			],
+			"@events/*": [
+				"../../../events/*"
+			],
+			"@shared/*": [
+				"../../../shared/*"
+			]
+		}
+	}
+}
