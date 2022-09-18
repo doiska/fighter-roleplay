@@ -31,6 +31,6 @@
 		"vitest": "^0.22.1"
 	},
 	"dependencies": {
-		"@fighter/framework": "^0.0.16"
+		"@fighter/framework": "^0.1.0"
 	}
 }
