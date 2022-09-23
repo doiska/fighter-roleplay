@@ -3,7 +3,7 @@ game 'gta5'
 name 'core'
 
 files {
-    'imports.lua'
+    './resources/imports.js'
 }
 
 client_scripts {

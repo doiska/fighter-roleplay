@@ -3,7 +3,7 @@
 // extends globalThis.exports
 
 
-// @ts-ignore
+
 // declare namespace globalThis {
 // 	var exports: {
 // 		appearance: {
@@ -11,3 +11,19 @@
 // 		}
 // 	};
 // }
+
+
+interface Core {
+	getPlayers(): string[];
+}
+
+declare global {
+	var Core: Core;
+	var exports: any | {
+		core: {
+			getSharedObject: () => Core;
+		}
+	};
+}
+
+export {};

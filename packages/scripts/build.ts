@@ -4,7 +4,7 @@ import { exec } from "child_process";
 import {BuildOptions} from "esbuild";
 import { resolve } from "path";
 
-export function prepareBuild(sourcePath: string): (env: string, buildFolderPath: string) => BuildOptions {
+export function prepareBuild(sourcePath: string): (buildFolderPath: string, env?: string) => BuildOptions {
 
 	const cleanName = ` ${sourcePath.split("/")[2].toUpperCase()} `;
 	const app = chalk.bgBlue(chalk.black(cleanName));
@@ -25,7 +25,7 @@ export function prepareBuild(sourcePath: string): (env: string, buildFolderPath:
 		typeCheck.on("exit", () => log_success("TYPESCRIPT", "Typechecking succeeded."));
 	};
 
-	return (env, buildFolderPath) => {
+	return (buildFolderPath, env) => {
 		const folder = resolve(sourcePath, `./${env}`);
 		const target = resolve(sourcePath, `${folder}/${env}.ts`);
 		const isServer = env === "server";
