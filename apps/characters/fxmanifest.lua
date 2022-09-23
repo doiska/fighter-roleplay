@@ -3,8 +3,15 @@ game 'gta5'
 name 'core'
 
 client_scripts {
-    'dist/client/*.js'
+    'client/*.js'
 }
 server_script {
-    'dist/server/*.js'
+    'server/*.js'
 }
+
+files {
+  'web/index.html',
+  'web/_next/*.js'
+}
+
+ui_page 'web/index.html'

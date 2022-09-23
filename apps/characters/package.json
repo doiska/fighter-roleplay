@@ -1,9 +1,9 @@
 {
-	"name": "@fighter/core",
+	"name": "@fighter/characters",
 	"version": "1.0.0",
 	"license": "MIT",
 	"scripts": {
-		"build": "node build.prod.js",
+		"build": "cd resources/web && pnpm build && node ../../build.dev.mjs",
 		"watch": "node build.dev.mjs",
 		"test-server": "vitest --verbose --ui --config ./resources/server/vitest.config.ts",
 		"test-client": "vitest --verbose --ui --config ./resources/client/vitest.config.ts",
