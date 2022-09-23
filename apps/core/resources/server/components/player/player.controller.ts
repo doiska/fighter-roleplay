@@ -34,8 +34,16 @@ export class PlayerController {
 		return this.emitter.emitNet(LoginEvents.SHOW_CHARACTERS_SCREEN, source);
 	}
 
-	@Export()
+
+	// exports['core']:getPlayers()
+	// core.getPlayers()
+	// @ExportSingleton()
+	// global.exports['core'].getPlayers()
+	// global.exports['core'].core.getPlayers() -> core.getPlayers()
+
+	@Export("getPlayers")
 	public getPlayers() {
+		console.log("->> [getPlayers] Called");
 		return this.playerService.getPlayers();
 	}
 }
