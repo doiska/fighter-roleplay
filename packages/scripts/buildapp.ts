@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import {black, red, bgRed, bgGreen, green, redBright, blue} from "colorette";
 import {build} from "esbuild";
-import {readdirSync, copyFileSync} from "fs";
+import {readdirSync, copyFileSync, watch, existsSync} from "fs";
 import {resolve} from "path";
 
 import {prepareBuild} from "./build.js";
@@ -28,12 +28,20 @@ folders.forEach(folder => {
 		const manifest = parseFXManifest(`${folder}/${file}`);
 
 		return {
-			server: prepare("server", buildPath),
-			client: prepare("client", buildPath),
-			copy: () => {
-				copyFileSync(`${folder}/${file}`, `${buildPath}/${file}`);
+			server: prepare(buildPath, "server"),
+			client: prepare(buildPath, "client"),
+			copy: (_file = file) => {
+				try {
+					copyFileSync(`${folder}/${_file}`, `${buildPath}/${_file}`);
+					watch(`${folder}/${_file}`, {persistent: true}, () => {
+						console.log(`${chalk.green("Copied")} ${_file} to ${buildPath}`);
+						copyFileSync(`${folder}/${_file}`, `${buildPath}/${_file}`);
+					});
+				} catch (e) {
+					console.log(`${chalk.red("Failed to copy")} ${_file} to ${buildPath}`);
+				}
 
-				if(!manifest.files) {
+				if (!manifest.files) {
 					console.log(chalk.red("No files found in manifest"), manifest);
 					return;
 				}
@@ -47,7 +55,10 @@ folders.forEach(folder => {
 
 			await build(stage.server);
 			await build(stage.client);
+
 			stage.copy();
+			stage.copy("imports.lua");
+			stage.copy("package.json");
 
 			console.log(bgGreen(black("[BUILD]")), green(`Successfully built ${blue(appName.toUpperCase())} in ${(Date.now() - milis) / 1000}s.`));
 		} catch (e) {
