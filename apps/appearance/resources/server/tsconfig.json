@@ -10,8 +10,8 @@
             "DOM"
         ],
         "types": [
-            "@citizenfx/server",
-            "@types/node"
+			"@fighter/typings",
+            "@citizenfx/server"
 		],
         "moduleResolution": "node",
         "emitDecoratorMetadata": true,

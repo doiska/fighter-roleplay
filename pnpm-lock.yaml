@@ -8,6 +8,7 @@ importers:
       '@citizenfx/client': ^2.0.5818-1
       '@citizenfx/server': ^2.0.5818-1
       '@fighter/framework': ^0.1.2
+      '@fighter/typings': workspace:*
       '@swc/core': ^1.2.246
       '@types/node': ^18.7.10
       '@typescript-eslint/eslint-plugin': ^5.36.2
@@ -30,6 +31,7 @@ importers:
       vitest: ^0.22.1
     dependencies:
       '@fighter/framework': 0.1.2_ghaqyin62chxovtk6ezymdc424
+      '@fighter/typings': link:apps/typings
     devDependencies:
       '@anatine/esbuild-decorators': 0.2.19_esbuild@0.15.7
       '@citizenfx/client': 2.0.5818-1

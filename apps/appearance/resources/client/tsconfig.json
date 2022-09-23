@@ -27,6 +27,6 @@
 		"../../../typings/**/*.d.ts"
 	],
 	"files": [
-		"../../../typings/global.d.ts"
+      "../../../typings/index.d.ts"
 	]
 }
