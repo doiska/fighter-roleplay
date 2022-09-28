@@ -1,6 +1,7 @@
 import { Collection } from "@discordjs/collection";
+import {Stateful} from "@typings/shared/stateful";
 
-export class StatefulEntity {
+export class StatefulEntity implements Stateful {
 
 	private readonly _state: Collection<string, any> = new Collection();
 

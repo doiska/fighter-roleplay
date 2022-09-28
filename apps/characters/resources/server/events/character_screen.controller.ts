@@ -4,9 +4,14 @@ import { EventEmitter } from "@fighter/framework/services";
 import { LoginEvents } from "@events/login";
 
 @Controller()
-export class PlayerController {
+export class CharacterScreenController {
 	constructor(private readonly emitter: EventEmitter) {
 		console.log("PlayerController created");
+	}
+
+	@ServerEvent(LoginEvents.SHOW_CHARACTERS_SCREEN)
+	public async onShowCharactersScreen(_source: number, ...args: any[]) {
+		console.log(`Player ${_source} requested character screen`, args);
 	}
 
 	@ServerEvent(LoginEvents.SELECT_CHARACTER)

@@ -1,20 +1,15 @@
-/* eslint-disable no-var */
+/* eslint-disable */
 
-// extends globalThis.exports
+import { Collection } from "@discordjs/collection";
 
-
-
-// declare namespace globalThis {
-// 	var exports: {
-// 		appearance: {
-// 			applyAppearance: (appearance: string) => void;
-// 		}
-// 	};
-// }
-
+import {ICharacter} from "./authentication/character";
+import {Stateful} from "./shared/stateful";
 
 interface Core {
-	getPlayers(): string[];
+	getPlayer(source: number): ICharacter & Stateful;
+	getPlayerByCharacterId(characterId: number): ICharacter & Stateful;
+	getPlayerByIdentifier(identifier: string): ICharacter & Stateful;
+	getPlayers(): Collection<number, ICharacter & Stateful>
 }
 
 declare global {

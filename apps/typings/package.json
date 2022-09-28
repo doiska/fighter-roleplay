@@ -1,5 +1,8 @@
 {
 	"name": "@fighter/typings",
 	"version": "1.0.0",
-	"main": "index.d.ts"
+	"main": "index.d.ts",
+	"dependencies": {
+		"@discordjs/collection": "^1.1.0"
+	}
 }

@@ -51,7 +51,7 @@ folders.forEach(folder => {
 
 	buildStage.forEach(async stage => {
 		try {
-			const milis = Date.now();
+			const millis = Date.now();
 
 			await build(stage.server);
 			await build(stage.client);
@@ -60,7 +60,7 @@ folders.forEach(folder => {
 			stage.copy("imports.lua");
 			stage.copy("package.json");
 
-			console.log(bgGreen(black("[BUILD]")), green(`Successfully built ${blue(appName.toUpperCase())} in ${(Date.now() - milis) / 1000}s.`));
+			console.log(bgGreen(black("[BUILD]")), green(`Successfully built ${blue(appName.toUpperCase())} in ${(Date.now() - millis) / 1000}s.`));
 		} catch (e) {
 			console.log(bgRed(black("[BUILD]")), red(`Failed to build ${redBright(appName)}.`));
 			console.log(e);

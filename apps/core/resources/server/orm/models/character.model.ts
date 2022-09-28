@@ -3,7 +3,6 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity({ name: "character" })
 export class CharacterModel implements ICharacter {
-
 	@PrimaryGeneratedColumn()
 		characterId: number;
 
@@ -35,8 +34,17 @@ export class CharacterModel implements ICharacter {
 		job: number;
 
 	@Column({ default: 0 })
-		payCheck: number;
+		pay_check: number;
 
 	@Column({ default: 0 })
 		playing_time: number;
+
+	@Column({ default: false })
+		isConnected: boolean;
+
+	@Column({ default: 0 })
+		isLoggedIn: boolean;
+
+	@Column({ default: 0 })
+		isCharacterLoaded: boolean;
 }

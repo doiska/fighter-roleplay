@@ -26,6 +26,9 @@
 			"@models/*": [
 				"./orm/models/*"
 			],
+			"@shared-typings/*": [
+				"../../shared-typings/*"
+			],
 			"@typings/*": [
 				"../../../typings/*"
 			],

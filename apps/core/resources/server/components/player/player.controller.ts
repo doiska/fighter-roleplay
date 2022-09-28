@@ -1,37 +1,48 @@
-import { Controller, ClientEvent, ServerEvent } from "@fighter/framework/decorators";
+import { Controller} from "@fighter/framework/decorators";
 import { Export } from "@fighter/framework/decorators/exports.decorator";
 import { EventEmitter } from "@fighter/framework/services";
 
-import { PlayerService } from "@components/player/player.service";
 
-import { AccountEvents } from "@events/account";
-import { LoginEvents } from "@events/login";
-import { PlayerEvents } from "@events/player";
-import { IAccount } from "@typings/authentication/account.model";
+import {PlayerService} from "@components/player/player.service";
+
+import {getUserIdentifier} from "@helpers/account.helper";
+import {ICharacter} from "@typings/authentication/character";
 
 @Controller()
 export class PlayerController {
 	private playerService: PlayerService;
 	private emitter: EventEmitter;
 
-	constructor(_emitter: EventEmitter, playerService: PlayerService) {
+	constructor(_emitter: EventEmitter, playerCache: PlayerService) {
 		this.emitter = _emitter;
-		this.playerService = playerService;
+		this.playerService = playerCache;
 		console.log("->> PlayerController initialized");
 	}
 
-	@ServerEvent(AccountEvents.ACCOUNT_LOADED)
-	public async onAccountLoaded(source: number, account: IAccount) {
-		console.log(`->> [onAccountLoaded] Player ${source} loaded account:`, account);
+	@Export("loadPlayer")
+	public loadPlayer(source: number, characterId: number) {
+		console.log("->> [loadPlayer] Called");
+		return this.playerService.loadPlayer(getUserIdentifier(source), characterId);
 	}
 
-	@ClientEvent(PlayerEvents.PLAYER_LOADED)
-	public async onPlayerLoaded(source: number) {
+	@Export("updatePlayer")
+	public updatePlayer(source: number, player: Partial<ICharacter>) {
+		this.playerService.updatePlayer(source, player);
+	}
 
-		const _source = global.source;
+	@Export("getPlayer")
+	public getPlayer(source: number) {
+		return this.playerService.getPlayer(source);
+	}
 
-		console.log(`->> [onPlayerLoaded] Player ${source} ${_source} loaded, showing character screen.`);
-		return this.emitter.emitNet(LoginEvents.SHOW_CHARACTERS_SCREEN, source);
+	@Export("getPlayerByCharacterId")
+	public getPlayerByCharacterId(characterId: number) {
+		return this.playerService.getPlayerByCharacterId(characterId);
+	}
+
+	@Export("getPlayerByIdentifier")
+	public getPlayerByIdentifier(identifier: string) {
+		return this.playerService.getPlayerByIdentifier(identifier);
 	}
 
 	@Export("getPlayers")

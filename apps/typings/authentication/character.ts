@@ -1,4 +1,5 @@
-export interface ICharacter extends BaseInfo, GameInfo, CustomizationInfo, BankInfo, DetailsInfo {}
+export interface ICharacter extends BaseInfo, GameInfo, CustomizationInfo, BankInfo, DetailsInfo, Status {
+}
 
 interface BaseInfo {
 	characterId: number;
@@ -25,6 +26,12 @@ interface BankInfo {
 
 interface DetailsInfo {
 	playing_time?: number;
+}
+
+interface Status {
+	isConnected: boolean;
+	isLoggedIn: boolean;
+	isCharacterLoaded: boolean;
 }
 
 export interface ICharacterCreate {
